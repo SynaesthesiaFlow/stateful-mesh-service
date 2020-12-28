@@ -50,18 +50,15 @@ func (neo *Neo4j_connection) CreateNewConnection() {
 // read mode.
 //defer session.Close()
 
-func (neo *Neo4j_connection) RunTestCypher(s string) error {
-	result, err := neo.session.Run("CREATE (n:Item { id: $id, name: $name }) RETURN n.id, n.name", map[string]interface{}{
-		"id":   21,
-		"name": "Item 21",
-	})
+func (neo *Neo4j_connection) RunTestCypher(s string, vars map[string]interface{}) error {
+	result, err := neo.session.Run(s, vars)
 	if err != nil {
 		return err
 	}
 
 	var record *neo4j.Record
 	for result.NextRecord(&record) {
-		fmt.Printf("Created Item with Id = '%d' and Name = '%s'\n", record.Values[0].(int64), record.Values[1].(string))
+		fmt.Printf("Created Item with Id = '%v'\n", record.Values)
 	}
 	return result.Err()
 }
