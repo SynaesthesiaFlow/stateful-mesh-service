@@ -1,5 +1,7 @@
-package import_ext_go_mod
-
-func main() {
-	Hello
-}
+package main
+//
+//import "mockmain"
+//
+//func main() {
+//	mockmain.Hello()
+//}
