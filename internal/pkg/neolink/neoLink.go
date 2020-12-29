@@ -1,4 +1,4 @@
-package neoLink
+package neolink
 
 import (
 	"fmt"

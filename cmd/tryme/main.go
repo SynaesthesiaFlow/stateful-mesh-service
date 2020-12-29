@@ -3,16 +3,21 @@ package main
 import (
 	"fmt"
 	"github.com/SynaesthesiaFlow/stateful-mesh-service/internal/pkg/fixture"
-	"github.com/SynaesthesiaFlow/stateful-mesh-service/internal/pkg/neoLink"
+	"github.com/SynaesthesiaFlow/stateful-mesh-service/internal/pkg/neolink"
 	"github.com/neo4j/neo4j-go-driver/v4/neo4j"
 )
 
 func main() {
-	f := fixture.Fixture{[12]neo4j.Point3D{{1, 2, 3, 0}, {1134, 2, 3, 0}}}
+	f := fixture.Fixture{[]neo4j.Point3D{{1, 2, 3, 0}, {1134, 2, 3, 0}}}
 	f.Points[0].X = 0.3
 	fmt.Println(f)
 
-	neo := neoLink.Neo4j_connection{
+	autogen := fixture.CreateStrip(0.5, 10)
+	fmt.Println(autogen)
+
+	autogen.SynchronizeNeo4j()
+
+	neo := neolink.Neo4j_connection{
 		//"bolt://localhost:7687",
 		// "neo4j",
 		//"password",
